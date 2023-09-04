@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    networks:
+      lamp:
+        - ipv4_address: 172.100.0.10
+  redis:
+    build:
+      context: ./redis
+      dockerfile: Dockerfile
+    command: --requirepass secret
+    ports:
+      - "6378:6379"
+    networks:
+      lamp:
+        ipv4_address: 172.100.0.11
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8081"
+      - "8443"
+    networks:
+      lamp:
+        ipv4_address: 172.100.0.12
+  php:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    ports:
+      - "9100:9100"
+      - "9101:9101"
+      - "9102:9102"
+      - "9103:9103"
+      - "9104:9104"
+    networks:
+      lamp:
+        ipv4_address: 172.100.0.13
+    volumes:
+      - ./src:/var/www/src # 将本地的 src 目录挂载到容器的 /var/www/src 目录
+networks:
+  lamp:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.100.0.0/16
