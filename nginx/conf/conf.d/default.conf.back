@@ -1,0 +1,56 @@
+#upstream php-fpm {
+#    server my-php-fpm-1:9000;
+#    server my-php-fpm-2:9000;
+#    server my-php-fpm-3:9000;
+#}
+
+#server {
+
+#    listen 80;
+#    listen [::]:80;
+
+    # For https
+    # listen 443 ssl;
+    # listen [::]:443 ssl ipv6only=on;
+    # ssl_certificate /etc/nginx/ssl/default.crt;
+    # ssl_certificate_key /etc/nginx/ssl/default.key;
+
+#    server_name _;
+#    root /var/www/analytics.aomeisoftware.com/public;
+#    index index.php index.html index.htm;
+
+#   location / {
+#         try_files $uri $uri/ /index.php$is_args$args;
+#    }
+#
+#    location ~ \.php$ {
+#        try_files $uri /index.php =404;
+#        fastcgi_pass php-fpm;
+#        fastcgi_index index.php;
+#        fastcgi_buffers 16 16k;
+#        fastcgi_buffer_size 32k;
+#        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+#        #fixes timeouts
+#        fastcgi_read_timeout 600;
+#        # include fastcgi_params;
+#        proxy_set_header Host $host;
+#        proxy_set_header X-Real-IP $remote_addr;
+#        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#        fastcgi_param SERVER_ADDR $server_addr;
+#        fastcgi_param PHP_FPM_IP $upstream_addr;
+#       include fastcgi_params;
+#    }
+#
+#    location ~ /\.ht {
+#        deny all;
+#    }
+#
+#    location /.well-known/acme-challenge/ {
+#        root /var/www/letsencrypt/;
+#        log_not_found off;
+#    }
+#
+#    error_log /etc/nginx/log/error.log;
+#
+#    access_log /etc/nginx/log/access.log;
+#}

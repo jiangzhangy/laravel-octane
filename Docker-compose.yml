@@ -28,11 +28,14 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     ports:
-      - "8081"
-      - "8443"
+      - "8081:80"
+      - "8443:443"
     networks:
       lamp:
         ipv4_address: 172.100.0.12
+    volumes:
+      - ./:/usr/share/nginx/html
+      - ./nginx/conf:/etc/nginx
   php:
     build:
       context: ./php
