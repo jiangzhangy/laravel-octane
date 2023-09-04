@@ -12,7 +12,7 @@ services:
       - "3307:3306"
     networks:
       lamp:
-        - ipv4_address: 172.100.0.10
+        ipv4_address: 172.100.0.10
   redis:
     build:
       context: ./redis
